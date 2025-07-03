@@ -1,0 +1,114 @@
+.filter-form {
+    display: flex;
+    flex-direction: row; /* Cambiar a fila para alinear horizontalmente */
+    align-items: center; /* Alinea los elementos verticalmente */
+    gap: 2rem; /* Espacio entre los grupos */
+    padding: 1rem;
+  }
+  
+  .date-inputs {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .date-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el checkbox y el texto */
+    justify-content: center;
+  }
+  
+  .checkbox-label {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 0.3rem; /* Ajusta para un espacio correcto */
+    text-align: center;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem; /* Añade un poco de margen superior para separar */
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+  }
+  
+  .btn:hover {
+    opacity: 0.8;
+  }
+  .custom-label {
+    font-family: Arial, sans-serif; /* Cambia el tipo de letra */
+    font-size: 16px; /* Cambia el tamaño de la letra */
+    font-weight: bold; /* Otras propiedades, como negrita */
+    color: #333; /* Cambia el color de la fuente */
+  }
+  .resumen-mensual {
+    top: 0; /* Alineado a la parte superior de la ventana */
+    left: 0; /* Alineado al lado izquierdo de la ventana */
+    padding: 10px 20px; /* Ajusta el padding para más espacio interno horizontal */
+    width: auto; /* Ancho se ajusta automáticamente al contenido */
+    height: 50px; /* Establece una altura fija para una disposición horizontal */
+    background-color: #fdfdfd; /* Color de fondo */
+    border-bottom: 2px solid #ddd; /* Borde inferior para una separación visual */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil debajo del componente */
+    z-index: 1000; /* Superposición sobre otros elementos */
+    display: flex; /* Utiliza flexbox para disposición horizontal */
+    align-items: center; /* Alinea el contenido verticalmente centrado */
+    gap: 20px;
+    overflow-x: auto; /* Permite el desplazamiento horizontal si el contenido es más largo */
+  }
+  .resumen-mensual p {
+    display: flex;
+    align-items: center; /* Alinea los iconos y el texto en el centro verticalmente */
+    margin: 0 15px; /* Espaciado entre cada párrafo */
+    padding: 5px 0;
+    font-size: 1em;
+  }
+  .resumen-mensual .fa-icon {
+    margin-right: 8px; /* Espacio entre el icono y el texto */
+    color: #4a90e2; /* Cambia el color del icono si lo deseas */
+  }
+  @media (max-width: 768px) {
+    .resumen-mensual {
+      flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas más pequeñas */
+    }
+  
+    .resumen-mensual p {
+      margin: 5px 0; /* Ajusta el espaciado en pantallas pequeñas */
+    }
+  }
+  
+  .resumen-mensual h2 {
+    margin: 0 20px 0 0; /* Margen derecho para espaciar el encabezado del contenido */
+    font-size: 1.5em; /* Tamaño de fuente del encabezado */
+    white-space: nowrap; /* Evita que el texto del encabezado se divida en líneas */
+  }
+  
+  .resumen-mensual p {
+    margin: 0 10px; /* Añade espacio horizontal entre los párrafos */
+    padding: 0; /* Elimina padding innecesario para una alineación más compacta */
+    white-space: nowrap; /* Evita el salto de línea dentro de los párrafos */
+  }
+  

@@ -1,0 +1,188 @@
+/* DecideEtic.css */
+
+/* Contenedor principal */
+.decide-etic-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 50%, #e8eaf6 100%);
+}
+
+/* Header con gradiente */
+.header-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%);
+}
+
+/* Marco del acrónimo */
+.framework-acronym {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.1rem;
+}
+
+/* Colores personalizados para purple */
+.text-purple {
+  color: #8b5cf6 !important;
+}
+
+.bg-purple {
+  background-color: #8b5cf6 !important;
+}
+
+.border-purple {
+  border-color: #8b5cf6 !important;
+}
+
+.btn-purple {
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
+  color: white;
+}
+
+.btn-purple:hover {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  color: white;
+}
+
+/* Fondos claros para las tarjetas de pasos */
+.bg-danger-light {
+  background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+.bg-primary-light {
+  background-color: rgba(13, 110, 253, 0.1) !important;
+}
+
+.bg-info-light {
+  background-color: rgba(13, 202, 240, 0.1) !important;
+}
+
+.bg-warning-light {
+  background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+.bg-success-light {
+  background-color: rgba(25, 135, 84, 0.1) !important;
+}
+
+.bg-secondary-light {
+  background-color: rgba(108, 117, 125, 0.1) !important;
+}
+
+.bg-purple-light {
+  background-color: rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Estilos para los botones de pasos */
+.step-pill {
+  border-radius: 50px !important;
+  padding: 0.75rem 1.25rem !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.step-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.step-pill.active {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.step-pill.completed {
+  background-color: #d1e7dd !important;
+  border-color: #198754 !important;
+  color: #198754 !important;
+}
+
+/* Contenedor de iconos en el header de las tarjetas */
+.step-icon-container {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Barra de progreso animada */
+.progress-bar {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transition: width 0.6s ease;
+}
+
+/* Header de principios */
+.principles-header {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.principles-header:hover {
+  background: linear-gradient(135deg, #5b5fd7, #7c3aed);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Tarjetas de principios */
+.principle-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+  cursor: pointer;
+}
+
+.principle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #6366f1;
+}
+
+/* Iconos de principios */
+.principle-icon {
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  transition: transform 0.2s ease;
+}
+
+.principle-card:hover .principle-icon {
+  transform: scale(1.1);
+}
+
+/* Estilos para formularios */
+.form-control:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.15);
+}
+
+.form-control-lg {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
+
+/* Tarjetas con bordes de colores */
+.card.border-danger {
+  border-width: 2px !important;
+}
+
+.card.border-primary {
+  border-width: 2px !important;
+}
+
+.card.border-info {
+  border-width: 2px !important;
+}
+

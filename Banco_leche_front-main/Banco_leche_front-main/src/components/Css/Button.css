@@ -1,0 +1,72 @@
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  .button:active {
+    transform: scale(0.95);
+  }
+  /* Estilizar los checkboxes */
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid green; /* Cambia el color del borde */
+  border-radius: 3px; /* Redondea las esquinas */
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #0279f8; /* Cambia el color de fondo */
+  border-color: #0a97f5;
+}
+
+input[type="checkbox"]:checked::after {
+  content: ""; /* Marca de X */
+  position: absolute;
+  top: 0;
+  left: 4px;
+  font-size: 16px;
+  color: black; /* Color de la marca */
+}
+
+.resumen-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.resumen-box {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  width: 200px;
+}
+
+.resumen-box h3 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.resumen-box p {
+  font-size: 14px;
+  color: #6c757d;
+}

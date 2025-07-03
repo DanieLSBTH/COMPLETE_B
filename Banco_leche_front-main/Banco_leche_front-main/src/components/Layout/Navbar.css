@@ -1,0 +1,523 @@
+/* Estilo para el navbar */
+
+.navbar {
+    background: linear-gradient(90deg, rgb(239, 156, 73), rgba(249,132,74,0.9));
+    color: white;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }.navbar-centered-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    pointer-events: none; /* Permite que los clics pasen a través del título */
+  }
+  .navbar-nav {
+    align-items: center;
+  }
+  .navbar-nav {
+    align-items: center;
+  }
+  
+  /* Estilo común para enlaces y dropdowns */
+  .nav-link,
+  .nav-item .dropdown > .nav-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Ajustes específicos para los dropdowns */
+  .nav-item.dropdown {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-item.dropdown .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Aseguramos que los íconos estén alineados verticalmente */
+  .nav-link svg,
+  .nav-item.dropdown .dropdown-toggle svg {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  
+  /* Ajustamos el espacio entre el ícono y el texto en los dropdowns */
+  .nav-item.dropdown .dropdown-toggle span {
+    margin-left: 0.25rem;
+  }
+  
+  /* Estilos para el menú desplegable */
+  .dropdown-menu {
+    margin-top: 0.5rem;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .navbar-centered-title h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+  
+  .navbar-centered-title h2 {
+    font-size: 1rem;
+    margin-top: 0.25rem;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+  
+  .navbar-light .navbar-nav .nav-link,
+  .navbar-dark .navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 1rem;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  .navbar-light .navbar-nav .nav-link:hover,
+  .navbar-dark .navbar-nav .nav-link:hover {
+    color: #f1f1f1 !important;
+    transform: translateY(-2px);
+  }
+  
+  .navbar-light .navbar-nav .nav-link.active,
+  .navbar-dark .navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .navbar-logo {
+    font-weight: bold;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+   
+    padding-left: 15px; /* Añadimos un poco de padding para que no esté pegado al borde */
+
+  }
+  
+  .navbar-logo img {
+    max-height: 80px;
+    width: auto;
+  }
+  
+  .nav-icon-with-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .nav-link {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #6eb4fae6;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .nav-link:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+  
+  /* Estilo mejorado para el botón de cerrar sesión */
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #fdf5f5f6;
+    border: 1px solid #f91717;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+  }
+  
+  /* Estilos para dropdown */
+  .dropdown-menu {
+    background-color: rgba(255,255,255,0.9);
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-item {
+    color: #333 !important;
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: rgba(249,132,74,0.1);
+  }
+  
+  /* Animaciones para dropdown */
+  .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Estilos para Offcanvas */
+  .offcanvas {
+    background-color: #f8f9fa;
+  }
+  
+  .offcanvas .nav-link {
+    color: #0d0d0d !important;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(204, 30, 30, 0.1);
+  }
+  
+  .offcanvas .nav-link:hover {
+    background-color: rgba(225, 58, 58, 0.05);
+  }
+  
+  .offcanvas .logout-btn {
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  
+  /* Ajustes responsivos */
+  @media (max-width: 991px) {
+    .navbar-nav {
+      padding-top: 1rem;
+    }
+    .navbar-logo {
+        padding-left: 15px; /* Mantenemos un poco de padding en móviles */
+      }
+    .nav-link {
+      padding: 0.5rem 1rem;
+    }
+    .navbar-centered-title {
+        position: static;
+        transform: none;
+        padding: 10px 0;
+      }
+      .navbar-centered-title h1 {
+        font-size: 1.2rem;
+      }
+    
+      .navbar-centered-title h2 {
+        font-size: 0.9rem;
+      }
+    
+    .dropdown-menu {
+      background-color: transparent;
+      border: none;
+      padding-left: 1.5rem;
+    }
+    
+    .dropdown-item {
+      color: rgb(18, 17, 17) !important;
+    }
+    .nav-link,
+  .nav-item .dropdown > .nav-link {
+    padding: 0.75rem 1rem;
+  }
+  }
+  
+  @media (max-width: 576px) {
+    .navbar-brand {
+      font-size: 1.2rem;
+    }
+    
+    .nav-link {
+      font-size: 0.9rem;
+    }
+    .navbar-logo span {
+        display: none; /* Oculta el texto "Banco de leche" en móviles muy pequeños */
+      }
+  }
+
+  /* ... (estilos existentes) ... */
+
+.nav-animate .nav-link {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Aplicar un retraso escalonado a cada elemento */
+  .nav-animate .nav-link:nth-child(1) { animation-delay: 0.1s; }
+  .nav-animate .nav-link:nth-child(2) { animation-delay: 0.2s; }
+  .nav-animate .nav-link:nth-child(3) { animation-delay: 0.3s; }
+  .nav-animate .nav-link:nth-child(4) { animation-delay: 0.4s; }
+  .nav-animate .nav-link:nth-child(5) { animation-delay: 0.5s; }
+  /* ... añade más si tienes más elementos ... */
+  
+  /* Animación para el botón de cerrar sesión */
+  .nav-animate .logout-btn {
+    opacity: 0;
+    transform: scale(0.8);
+    animation: scaleIn 0.5s ease forwards;
+    animation-delay: 0.6s; /* Ajusta este valor según la cantidad de elementos en tu navbar */
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* ... (otros estilos existentes) ... */
+  /* Animaciones para el logo y título */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleInLogo {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Aplicar animaciones al logo */
+.navbar-logo {
+  animation: scaleInLogo 1.2s ease-out forwards;
+}
+
+.navbar-logo img {
+  max-height: 80px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover img {
+  transform: scale(1.05);
+}
+
+/* Animaciones para el título */
+.navbar-centered-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
+}
+
+.navbar-centered-title h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  animation: slideFromLeft 1s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.navbar-centered-title h2 {
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  animation: slideFromRight 1s ease-out forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+/* Efecto hover suave para el título */
+.navbar-centered-title h1,
+.navbar-centered-title h2 {
+  transition: transform 0.3s ease;
+}
+
+.navbar:hover .navbar-centered-title h1 {
+  transform: translateY(-2px);
+}
+
+.navbar:hover .navbar-centered-title h2 {
+  transform: translateY(2px);
+}
+
+/* Mantener responsividad */
+@media (max-width: 991px) {
+  .navbar-centered-title {
+    position: static;
+    transform: none;
+    padding: 10px 0;
+  }
+
+  .navbar-centered-title h1 {
+    font-size: 1.2rem;
+  }
+
+  .navbar-centered-title h2 {
+    font-size: 0.9rem;
+  }
+
+  .navbar-logo {
+    padding-left: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-centered-title h1 {
+    font-size: 1rem;
+  }
+
+  .navbar-centered-title h2 {
+    font-size: 0.8rem;
+  }
+}
+
+/* Botón moderno y suave */
+.btn-modern-smooth {
+  background: linear-gradient(90deg, #f4eefa60, #4a86ee68);
+  color: white;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-modern-smooth:hover {
+  background: linear-gradient(90deg, #2574fc80, #b384e551);
+  transform: translateY(-2px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-modern-smooth:active {
+  transform: translateY(1px);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación de fondo */
+.btn-modern-smooth::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s, transform 0.6s;
+  transform: scale(0.5);
+  z-index: 0;
+}
+
+.btn-modern-smooth:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.btn-modern-smooth .icon {
+  font-size: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-modern-smooth:hover .icon {
+  transform: rotate(360deg);
+}
+
+/* In your Navbar.css */
+.btn-modern-smooth {
+  /* Your existing styles */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+@media (max-width: 576px) {
+  .navbar-logo img {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,105 @@
+/* Estilo para el navbar */
+.navbar {
+    background: linear-gradient(90deg, #f9c74f, #f9844a, #f9b24d, #f9bc60, #ffdd79);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-bottom: 2px solid #ffdd79;
+  }
+  
+  .navbar-light .navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1rem; /* Tamaño de texto más grande */
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-light .navbar-nav .nav-link:hover {
+    color: #4a4a4a;
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo transparente */
+  }
+  
+  .navbar-light .navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.3); /* Fondo más intenso para la sección activa */
+  }
+  /* Ajustes para pantallas más pequeñas */
+@media (max-width: 991px) {
+    .navbar {
+      flex-direction: column;
+    }
+  
+    .nav-link {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  
+    .navbar-nav {
+      text-align: center;
+      padding: 0;
+    }
+  
+    .navbar-nav .nav-item {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  /* Estilo mejorado para el botón de cerrar sesión */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dc3545; /* Rojo intenso */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+  }
+  .nav-icon-with-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-icon-with-text span {
+    margin-left: 5px;
+  }
+  
+  .nav-icon-with-text:hover {
+    color: #ffdd79; /* Color dorado cuando se pasa el ratón */
+  }
+  .nav-link {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #ffdd79;
+    bottom: 0;
+    left: -100%;
+    transition: left 0.4s ease-in-out;
+  }
+  
+  .nav-link:hover::before {
+    left: 0;
+  }
+  
