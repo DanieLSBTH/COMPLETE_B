@@ -67,7 +67,6 @@ const DashboardInteractivo = () => {
   return (
     <animated.div style={fadeIn}>
       <Container fluid className="p-4">
-        <h1 className="text-center mb-4">Dashboard Interactivo</h1>
         <Row>
           
           <Col lg={12}>

@@ -174,7 +174,7 @@ const NavbarComponent = () => {
             <span>Registro Médico</span>
           </Link>
         </NavDropdown>
-
+          {/*
         <NavDropdown 
           title={
             <div className="dropdown-title-wrapper">
@@ -203,7 +203,7 @@ const NavbarComponent = () => {
             <FaRobot className="dropdown-icon" />
             <span>ChatBot</span>
           </Link>
-        </NavDropdown>
+        </NavDropdown>*/}
       </Nav>
       
       <Button 

@@ -193,10 +193,16 @@ const ImprovedLoginWithAPI = () => {
           {/* Logo del Hospital */}
           <div className="hospital-logo-container">
             <div className="hospital-logo">
-              <svg viewBox="0 0 24 24" className="hospital-icon">
-                <path fill="currentColor" d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                <path fill="white" d="M12 7v10M7 12h10"/>
-              </svg>
+             <svg viewBox="0 0 24 24" className="hospital-icon">
+  <defs>
+    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#ff7e00" />
+      <stop offset="100%" stopColor="#ffffff" />
+    </linearGradient>
+  </defs>
+  <path fill="url(#heartGradient)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+</svg>
+
             </div>
             <div className="pulse-ring"></div>
             <div className="pulse-ring-2"></div>
@@ -204,14 +210,11 @@ const ImprovedLoginWithAPI = () => {
 
           {/* Título Principal */}
           <div className="title-section">
-            <h1 className="main-title">
-              Sistema Banco de Leche
-            </h1>
-            <h2 className="subtitle">
-              Dr. Miguel Angel Soto Galindo
-            </h2>
-            <div className="title-underline"></div>
-          </div>
+  <h1 style={{ color: 'white', fontWeight: 'bold' }}>
+    Bienvenido al Sistema<span className="loading-dots">.</span>
+  </h1>
+</div>
+
 
           {/* Logos de Tecnología */}
           <div className="tech-logos">
@@ -352,7 +355,37 @@ const ImprovedLoginWithAPI = () => {
           .title-section {
             margin-bottom: 3rem;
           }
+          .loading-dots {
+  display: inline-block;
+  width: 20px;
+  text-align: left;
+}
 
+.loading-dots:after {
+  content: '.';
+  animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% {
+    color: rgba(255,255,255,0);
+    text-shadow: 0.25em 0 0 rgba(255,255,255,0),
+                 0.5em 0 0 rgba(255,255,255,0);
+  }
+  40% {
+    color: white;
+    text-shadow: 0.25em 0 0 rgba(255,255,255,0),
+                 0.5em 0 0 rgba(255,255,255,0);
+  }
+  60% {
+    text-shadow: 0.25em 0 0 white,
+                 0.5em 0 0 rgba(255,255,255,0);
+  }
+  80%, 100% {
+    text-shadow: 0.25em 0 0 white,
+                 0.5em 0 0 white;
+  }
+}
           .main-title {
             font-size: 3.5rem;
             font-weight: 800;

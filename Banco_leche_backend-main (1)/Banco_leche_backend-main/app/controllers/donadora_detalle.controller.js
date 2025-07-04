@@ -515,83 +515,95 @@ exports.getResumenPorMes = async (req, res) => {
 
     // Consulta optimizada con índices de fecha
     const query = `
-      WITH donaciones_mes AS (
-        SELECT 
-          TO_CHAR(dd.fecha, 'TMMonth YYYY') AS mes,
-          DATE_TRUNC('month', dd.fecha) AS fecha_ordenamiento,
-          CASE 
-            WHEN dd.id_extrahospitalario IS NOT NULL THEN 'Extrahospitalario'
-            ELSE 'Intrahospitalario'
-          END AS servicio_tipo,
-          dd.id_donadora,
-          dd.litros,
-          dd.nueva::boolean
-        FROM donadora_detalles dd
-        WHERE EXTRACT(YEAR FROM dd.fecha) = $1
-      ),
-      estadisticas_mes AS (
-        SELECT 
-          mes,
-          fecha_ordenamiento,
-          servicio_tipo,
-          COUNT(*) AS total_donaciones,
-          COUNT(DISTINCT id_donadora) AS total_donadoras,
-          SUM(litros) AS total_litros,
-          SUM(CASE WHEN nueva THEN 1 ELSE 0 END) AS total_nuevas
-        FROM donaciones_mes
-        GROUP BY mes, fecha_ordenamiento, servicio_tipo
-      ),
-      totales_mes AS (
-        SELECT 
-          mes,
-          fecha_ordenamiento,
-          SUM(total_donaciones) AS total_general_donaciones
-        FROM estadisticas_mes
-        GROUP BY mes, fecha_ordenamiento
-      ),
-      resultados_finales AS (
-        SELECT 
-          e.mes,
-          e.fecha_ordenamiento,
-          e.servicio_tipo,
-          e.total_donaciones,
-          e.total_donadoras,
-          e.total_litros,
-          ROUND((e.total_donaciones * 100.0 / NULLIF(t.total_general_donaciones, 0)), 2) AS porcentaje_donaciones,
-          e.total_nuevas,
-          CASE 
-            WHEN e.servicio_tipo = 'Extrahospitalario' THEN 0
-            WHEN e.servicio_tipo = 'Intrahospitalario' THEN 1
-            ELSE 2
-          END AS orden_tipo
-        FROM estadisticas_mes e
-        JOIN totales_mes t ON e.mes = t.mes
-        
-        UNION ALL
-        
-        SELECT 
-          e.mes,
-          e.fecha_ordenamiento,
-          'TOTAL GENERAL' AS servicio_tipo,
-          SUM(e.total_donaciones) AS total_donaciones,
-          SUM(e.total_donadoras) AS total_donadoras,
-          SUM(e.total_litros) AS total_litros,
-          100 AS porcentaje_donaciones,
-          SUM(e.total_nuevas) AS total_nuevas,
-          2 AS orden_tipo
-        FROM estadisticas_mes e
-        GROUP BY e.mes, e.fecha_ordenamiento
-      )
-      SELECT 
-        mes,
-        servicio_tipo,
-        total_donaciones,
-        total_donadoras,
-        total_litros,
-        porcentaje_donaciones,
-        total_nuevas
-      FROM resultados_finales
-      ORDER BY fecha_ordenamiento, orden_tipo;
+      -- Consulta corregida para evitar doble conteo de donadoras
+WITH donaciones_mes AS (
+  SELECT 
+    TO_CHAR(dd.fecha, 'TMMonth YYYY') AS mes,
+    DATE_TRUNC('month', dd.fecha) AS fecha_ordenamiento,
+    CASE 
+      WHEN dd.id_extrahospitalario IS NOT NULL THEN 'Extrahospitalario'
+      ELSE 'Intrahospitalario'
+    END AS servicio_tipo,
+    dd.id_donadora,
+    dd.litros,
+    dd.nueva::boolean
+  FROM donadora_detalles dd
+  WHERE EXTRACT(YEAR FROM dd.fecha) = $1
+),
+estadisticas_mes AS (
+  SELECT 
+    mes,
+    fecha_ordenamiento,
+    servicio_tipo,
+    COUNT(*) AS total_donaciones,
+    COUNT(DISTINCT id_donadora) AS total_donadoras,
+    SUM(litros) AS total_litros,
+    SUM(CASE WHEN nueva THEN 1 ELSE 0 END) AS total_nuevas
+  FROM donaciones_mes
+  GROUP BY mes, fecha_ordenamiento, servicio_tipo
+),
+-- 🔥 NUEVA CTE: Donadoras únicas por mes (sin duplicar)
+donadoras_unicas_mes AS (
+  SELECT 
+    mes,
+    fecha_ordenamiento,
+    COUNT(DISTINCT id_donadora) AS total_donadoras_unicas
+  FROM donaciones_mes
+  GROUP BY mes, fecha_ordenamiento
+),
+totales_mes AS (
+  SELECT 
+    mes,
+    fecha_ordenamiento,
+    SUM(total_donaciones) AS total_general_donaciones
+  FROM estadisticas_mes
+  GROUP BY mes, fecha_ordenamiento
+),
+resultados_finales AS (
+  SELECT 
+    e.mes,
+    e.fecha_ordenamiento,
+    e.servicio_tipo,
+    e.total_donaciones,
+    e.total_donadoras,
+    e.total_litros,
+    ROUND((e.total_donaciones * 100.0 / NULLIF(t.total_general_donaciones, 0)), 2) AS porcentaje_donaciones,
+    e.total_nuevas,
+    CASE 
+      WHEN e.servicio_tipo = 'Extrahospitalario' THEN 0
+      WHEN e.servicio_tipo = 'Intrahospitalario' THEN 1
+      ELSE 2
+    END AS orden_tipo
+  FROM estadisticas_mes e
+  JOIN totales_mes t ON e.mes = t.mes
+  
+  UNION ALL
+  
+  SELECT 
+    e.mes,
+    e.fecha_ordenamiento,
+    'TOTAL GENERAL' AS servicio_tipo,
+    SUM(e.total_donaciones) AS total_donaciones,
+    -- 🔥 CAMBIO: Usar donadoras únicas en lugar de sumar
+    du.total_donadoras_unicas AS total_donadoras,
+    SUM(e.total_litros) AS total_litros,
+    100 AS porcentaje_donaciones,
+    SUM(e.total_nuevas) AS total_nuevas,
+    2 AS orden_tipo
+  FROM estadisticas_mes e
+  JOIN donadoras_unicas_mes du ON e.mes = du.mes
+  GROUP BY e.mes, e.fecha_ordenamiento, du.total_donadoras_unicas
+)
+SELECT 
+  mes,
+  servicio_tipo,
+  total_donaciones,
+  total_donadoras,
+  total_litros,
+  porcentaje_donaciones,
+  total_nuevas
+FROM resultados_finales
+ORDER BY fecha_ordenamiento, orden_tipo;
     `;
 
     const results = await sequelize.query(query, {
