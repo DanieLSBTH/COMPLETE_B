@@ -188,6 +188,9 @@ class ShowControlLeche extends Component {
   handleNavigate1 = () => {
     this.props.navigate('/resumenfrascosestados');
   };
+  handleNavigate2 = () => {
+    this.props.navigate('/showbusquedafrasco');
+  };
 
   validateForm = () => {
     const { form } = this.state;
@@ -397,6 +400,20 @@ class ShowControlLeche extends Component {
                     >
                       <FaClipboardList className="me-2" />
                       Stock de Frascos
+                    </Button>
+                    <Button 
+                      color="info" 
+                      onClick={this.handleNavigate2} 
+                      className="d-flex align-items-center shadow-sm"
+                      style={{
+                        borderRadius: '15px',
+                        background: 'linear-gradient(135deg,rgb(147, 201, 251) 0%,rgba(130, 247, 126, 0.84) 100%)',
+                        border: 'none',
+                        padding: '12px 20px'
+                      }}
+                    >
+                      <FaClipboardList className="me-2" />
+                      Busqueda de frasco
                     </Button>
                     
                     <button 

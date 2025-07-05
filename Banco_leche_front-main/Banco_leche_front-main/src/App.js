@@ -37,9 +37,10 @@ import InsertarDonadoraModal from './components/Formularios/InsertarDonadoraModa
 import TopDonadoras from './components/Formularios/TopDonadoras';
 import ShowRegistroMedico from './components/Formularios/ShowRegistroMedico';
 import Etical from './components/Auth/Etical'
-import ResumenSolicitudNombre from './components/Formularios/ResumenSolicitudNombre'
-import ResumenFrascosEstados from './components/Formularios/ResumenFrascosEstados'
-import ShowFrascoDetalladoSolicitud from './components/Formularios/ShowFrascoDetalladoSolicitud'
+import ResumenSolicitudNombre from './components/Formularios/ResumenSolicitudNombre';
+import ResumenFrascosEstados from './components/Formularios/ResumenFrascosEstados';
+import ShowFrascoDetalladoSolicitud from './components/Formularios/ShowFrascoDetalladoSolicitud';
+import ShowBusquedaFrasco from './components/Formularios/ShowBusquedaFrasco';
 function App() {
   return (
     <AuthProvider>
@@ -75,6 +76,7 @@ function App() {
             <Route path="/showcontrolleche" element={<PrivateRoute><ShowControlLeche /></PrivateRoute>}/>
             <Route path="/resumencontrollechefrascos" element={<PrivateRoute><ResumenControlLecheFrascos /></PrivateRoute>}/>
             <Route path="/resumenfrascosestados" element={<PrivateRoute><ResumenFrascosEstados/></PrivateRoute>}/>
+            <Route path="/showbusquedafrasco" element={<PrivateRoute><ShowBusquedaFrasco/></PrivateRoute>}/>
             
             <Route path="/showregistromedico" element={<PrivateRoute> <ShowRegistroMedico/> </PrivateRoute>}/>
             <Route path="/showsolicitudleche" element={<PrivateRoute><ShowSolicitudLeche /></PrivateRoute>}/>
