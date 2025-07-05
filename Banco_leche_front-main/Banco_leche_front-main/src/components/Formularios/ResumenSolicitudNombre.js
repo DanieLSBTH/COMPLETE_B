@@ -420,8 +420,8 @@ const ResumenSolicitudNombre = () => {
                             {resumen.estadisticas.rango_fechas.primera_entrega && 
                              resumen.estadisticas.rango_fechas.ultima_entrega ? (
                               <span className="fw-semibold">
-                                {formatFecha(resumen.estadisticas.rango_fechas.primera_entrega)} - {' '}
-                                {formatFecha(resumen.estadisticas.rango_fechas.ultima_entrega)}
+                                {(resumen.estadisticas.rango_fechas.primera_entrega)} - {' '}
+                                {(resumen.estadisticas.rango_fechas.ultima_entrega)}
                               </span>
                             ) : 'No disponible'}
                           </div>
@@ -462,7 +462,7 @@ const ResumenSolicitudNombre = () => {
                           {resumen.solicitudes.map((solicitud, index) => (
                             <tr key={index} className="hover-row">
                               <td className="py-3">{solicitud.id_solicitud}</td>
-                              <td className="py-3">{formatFecha(solicitud.fecha_entrega)}</td>
+                              <td className="py-3">{(solicitud.fecha_entrega)}</td>
                               <td className="py-3">
                                 <Badge color="secondary" className="rounded-pill">
                                   {solicitud.tipo_paciente}

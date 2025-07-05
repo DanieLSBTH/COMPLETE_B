@@ -16,7 +16,9 @@ router.get('/detalle/:registro', solicitudDeLechesController.getRegistroDetallad
     router.get('/resumen/por-mes', solicitudDeLechesController.getResumenPorMes);
     // Recuperar un resumen por servicio y fechas
     router.get('/resumen/por-servicio-y-fechas', solicitudDeLechesController.getResumenPorServicioYFechas);
-  
+    // Búsqueda detallada por control de leche (NUEVA RUTA)
+    router.get('/detalle/control-leche/:id_control_leche', solicitudDeLechesController.getControlLecheDetallado);
+    
   router.get('/:id_solicitud', solicitudDeLechesController.findOne);
    
     // Actualizar un registro de solicitud_de_leches por su ID

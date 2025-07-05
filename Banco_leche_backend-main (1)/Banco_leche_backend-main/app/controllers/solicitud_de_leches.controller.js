@@ -492,6 +492,146 @@ exports.getRegistroDetallado = async (req, res) => {
     });
   }
 };
+exports.getControlLecheDetallado = async (req, res) => {
+  const idControlLeche = req.params.id_control_leche;
+
+  // Validación del parámetro
+  if (!idControlLeche || idControlLeche.trim().length === 0) {
+    return res.status(400).send({
+      message: 'El parámetro id_control_leche es obligatorio.'
+    });
+  }
+
+  try {
+    // Buscar el control de leche exacto
+    const controlLeche = await ControlDeLeche.findOne({
+      where: { 
+        id_control_leche: idControlLeche.trim() 
+      },
+      attributes: ['id_control_leche', 'no_frascoregistro', 'fecha_almacenamiento', 'volumen_ml_onza'],
+      include: [
+        {
+          model: db.trabajo_de_pasteurizaciones,
+          as: 'trabajo_de_pasteurizaciones',
+          attributes: ['no_frasco', 'kcal_l', 'porcentaje_grasa', 'acidez']
+        }
+      ],
+      raw: false
+    });
+
+    if (!controlLeche) {
+      return res.status(404).send({
+        message: `No se encontró el control de leche con ID: ${idControlLeche}`
+      });
+    }
+
+    // Buscar todas las solicitudes de leche que usan este control de leche
+    const solicitudes = await SolicitudDeLeches.findAll({
+      where: { 
+        id_control_leche: controlLeche.id_control_leche 
+      },
+      include: [
+        {
+          model: RegistroMedico,
+          as: 'registro_medicos',
+          attributes: ['id_registro_medico', 'registro_medico', 'recien_nacido']
+        }
+      ],
+      order: [['fecha_entrega', 'DESC']]
+    });
+
+    // Calcular totales y estadísticas con validación de valores nulos
+    const estadisticas = {
+      total_solicitudes: solicitudes.length,
+      total_frascos: 1, // Un control de leche corresponde a un frasco
+      total_onzas: solicitudes.reduce((sum, sol) => sum + (parseFloat(sol.onzas) || 0), 0),
+      total_litros: solicitudes.reduce((sum, sol) => sum + (parseFloat(sol.litros) || 0), 0),
+      total_costos: solicitudes.reduce((sum, sol) => sum + (parseFloat(sol.costos) || 0), 0),
+      total_volumen_solicitado: solicitudes.reduce((sum, sol) => sum + (parseFloat(sol.total_vol_solicitado) || 0), 0),
+      tipos_paciente: [...new Set(solicitudes.map(sol => sol.tipo_paciente).filter(Boolean))],
+      servicios: [...new Set(solicitudes.map(sol => sol.servicio).filter(Boolean))],
+      solicitantes: [...new Set(solicitudes.map(sol => sol.solicita).filter(Boolean))],
+      registros_medicos: [...new Set(solicitudes.map(sol => sol.registro_medicos?.registro_medico).filter(Boolean))],
+      rango_fechas: {
+        primera_entrega: solicitudes.length > 0 ? 
+          Math.min(...solicitudes.map(sol => new Date(sol.fecha_entrega).getTime())) : null,
+        ultima_entrega: solicitudes.length > 0 ? 
+          Math.max(...solicitudes.map(sol => new Date(sol.fecha_entrega).getTime())) : null
+      }
+    };
+
+    // Formatear las fechas
+    if (estadisticas.rango_fechas.primera_entrega) {
+      estadisticas.rango_fechas.primera_entrega = new Date(estadisticas.rango_fechas.primera_entrega).toISOString().split('T')[0];
+    }
+    if (estadisticas.rango_fechas.ultima_entrega) {
+      estadisticas.rango_fechas.ultima_entrega = new Date(estadisticas.rango_fechas.ultima_entrega).toISOString().split('T')[0];
+    }
+
+    // Formatear solicitudes para mostrar información relevante
+    const solicitudesDetalladas = solicitudes.map(solicitud => ({
+      id_solicitud: solicitud.id_solicitud,
+      fecha_nacimiento: solicitud.fecha_nacimiento,
+      edad_de_ingreso: solicitud.edad_de_ingreso,
+      tipo_paciente: solicitud.tipo_paciente,
+      peso_al_nacer: solicitud.peso_al_nacer,
+      peso_actual: solicitud.peso_actual,
+      kcal_o: solicitud.kcal_o,
+      volumen_toma_cc: solicitud.volumen_toma_cc,
+      numero_tomas: solicitud.numero_tomas,
+      total_vol_solicitado: solicitud.total_vol_solicitado,
+      servicio: solicitud.servicio,
+      fecha_entrega: solicitud.fecha_entrega,
+      solicita: solicitud.solicita,
+      onzas: solicitud.onzas,
+      litros: solicitud.litros,
+      costos: solicitud.costos,
+      registro_medico_info: {
+        id_registro_medico: solicitud.registro_medicos?.id_registro_medico,
+        registro_medico: solicitud.registro_medicos?.registro_medico,
+        recien_nacido: solicitud.registro_medicos?.recien_nacido
+      }
+    }));
+
+    // Respuesta completa con validación de números
+    res.send({
+      control_leche: {
+        id_control_leche: controlLeche.id_control_leche,
+        no_frascoregistro: controlLeche.no_frascoregistro,
+        fecha_almacenamiento: controlLeche.fecha_almacenamiento,
+        volumen_ml_onza: controlLeche.volumen_ml_onza,
+        pasteurizacion_info: {
+          no_frasco: controlLeche.trabajo_de_pasteurizaciones?.no_frasco,
+          kcal_l: controlLeche.trabajo_de_pasteurizaciones?.kcal_l,
+          porcentaje_grasa: controlLeche.trabajo_de_pasteurizaciones?.porcentaje_grasa,
+          acidez: controlLeche.trabajo_de_pasteurizaciones?.acidez
+        }
+      },
+      estadisticas: {
+        ...estadisticas,
+        total_onzas: parseFloat(estadisticas.total_onzas.toFixed(2)),
+        total_litros: parseFloat(estadisticas.total_litros.toFixed(2)),
+        total_costos: parseFloat(estadisticas.total_costos.toFixed(2)),
+        total_volumen_solicitado: parseFloat(estadisticas.total_volumen_solicitado.toFixed(2))
+      },
+      solicitudes: solicitudesDetalladas,
+      resumen: {
+        mensaje: `El control de leche ${idControlLeche} tiene ${estadisticas.total_solicitudes} solicitud(es) de leche`,
+        frasco_registro: controlLeche.no_frascoregistro,
+        total_onzas_entregadas: parseFloat(estadisticas.total_onzas.toFixed(2)),
+        costo_total: parseFloat(estadisticas.total_costos.toFixed(2)),
+        registros_medicos_atendidos: estadisticas.registros_medicos.length
+      }
+    });
+
+  } catch (err) {
+    console.error('Error en getControlLecheDetallado:', err);
+    res.status(500).send({
+      message: err.message || 'Error al obtener los detalles del control de leche.',
+      error: process.env.NODE_ENV === 'development' ? err : {}
+    });
+  }
+};
 exports.getResumenPorMes = async (req, res) => {
   try {
     // Obtén todas las solicitudes de leche agrupadas por mes

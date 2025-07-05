@@ -10,6 +10,7 @@ import { FaChartBar, FaAddressCard ,FaBuilding, FaClinicMedical, FaBaby, FaSistr
 import { Paginator } from 'primereact/paginator';
 import CreateSolicitudLeche from './ShowSolicitudDetalle';
 import ShowSolicitudDetalleFrasco from './ShowSolicitudDetalleFrasco';
+import ShowFrascoDetalladoSolicitud from './ShowFrascoDetalladoSolicitud'
 
 const url = "http://localhost:8080/api/solicitud_de_leches/";
 const urlRegistroMedico = "http://localhost:8080/api/registro_medico/";
@@ -122,6 +123,11 @@ class ShowSolicitud extends Component {
     // Usa la función navigate pasada como prop
     this.props.navigate('/resumen-por-solicitud');
   };
+   handleNavigate2 = () => {
+    // Usa la función navigate pasada como prop
+    this.props.navigate('/showFrascodetalladosolicitud');
+  };
+
 
   // Función optimizada para formatear opciones
   formatRegistroMedicoOptions = (registros = []) => {
@@ -496,6 +502,23 @@ handleControlLecheChange = (selectedOption) => {
               >
                 <FaChartBar className="me-2" />
                 Búsqueda por nombre
+              </button>
+               <button
+                className="btn btn-warning shadow-sm d-flex align-items-center"
+                style={{
+                  background: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+                  border: 'none',
+                  borderRadius: '15px',
+                  color: 'white',
+                  padding: '12px 24px',
+                  fontWeight: 'bold',
+                  boxShadow: '0 8px 20px rgba(17, 153, 142, 0.3)',
+                  transition: 'all 0.3s ease'
+                }}
+                onClick={this.handleNavigate2}
+              >
+                <FaChartBar className="me-2" />
+                Busqueda por frasco
               </button>
 
               <button

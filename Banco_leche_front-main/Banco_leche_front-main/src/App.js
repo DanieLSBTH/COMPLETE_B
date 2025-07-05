@@ -39,6 +39,7 @@ import ShowRegistroMedico from './components/Formularios/ShowRegistroMedico';
 import Etical from './components/Auth/Etical'
 import ResumenSolicitudNombre from './components/Formularios/ResumenSolicitudNombre'
 import ResumenFrascosEstados from './components/Formularios/ResumenFrascosEstados'
+import ShowFrascoDetalladoSolicitud from './components/Formularios/ShowFrascoDetalladoSolicitud'
 function App() {
   return (
     <AuthProvider>
@@ -78,6 +79,7 @@ function App() {
             <Route path="/showregistromedico" element={<PrivateRoute> <ShowRegistroMedico/> </PrivateRoute>}/>
             <Route path="/showsolicitudleche" element={<PrivateRoute><ShowSolicitudLeche /></PrivateRoute>}/>
             <Route path="/resumensolicitudnombre" element={<PrivateRoute><ResumenSolicitudNombre/></PrivateRoute>}/>
+            <Route path="/showFrascodetalladosolicitud" element={<PrivateRoute><ShowFrascoDetalladoSolicitud/></PrivateRoute>}/>
             
             <Route path="/resumen-por-solicitud" element={<PrivateRoute><ResumenPorFechaSolicitud /></PrivateRoute>}/>
             <Route path="/chatbotexample" element={<PrivateRoute><ChatBotExample /></PrivateRoute>}/>

@@ -268,6 +268,10 @@ exports.findByFrasco = (req, res) => {
       });
     });
 };
+
+// Agregar este método al controller control_de_leches.controller.js
+
+
 // Obtener estadísticas de stock por rango de fechas de almacenamiento
 // OPTIMIZADA PARA GRANDES VOLÚMENES DE DATOS (500K+ registros)
 exports.getStockByDateRange = async (req, res) => {
